@@ -1,11 +1,10 @@
 module GraphqlCore
   class Configuration
-    attr_accessor :schema_execute, :schema, :type_resolver
+    attr_accessor :schema_execute, :graphql_route
 
     def initialize
-      @schema = nil
       @schema_execute = nil
-      @type_resolver = nil
+      @graphql_route = nil
     end
   end
 end

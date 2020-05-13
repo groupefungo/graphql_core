@@ -1,28 +1,39 @@
-# GraphqlCore
-Short description and motivation.
-
-## Usage
-How to use my plugin.
-
+# GraphQL::Core
 ## Installation
-Add this line to your application's Gemfile:
 
+Une fois GraphQL installé dans votre application
+
+Ajouter cette ligne à votre Gemfile
 ```ruby
 gem 'graphql_core'
 ```
 
-And then execute:
-```bash
-$ bundle
-```
+Exécuter:
 
-Or install it yourself as:
-```bash
-$ gem install graphql_core
-```
+    $ bundle install
 
-## Contributing
-Contribution directions go here.
+Exécuter:
+    
+    $ rails g graphql_core:config
+    
+Ceci créera un initializer dans config/initializers puis modifier 
+
+config/initializers/graphql_core
+
+```ruby
+GraphqlCore.configure do |config|
+  config.graphql_route = '/custom_endpoint' ## par défaut '/graphql' 
+  config.schema_execute = ->(query, variables, context) {
+    YourGraphQLSchema.execute(query, variables: variables, context: context) # vous retrouverez cette méthode dans le graphql_controller de votre application
+  }
+end
+```
+    
+
+## Documentation
+
+TODO: Coming Soon
 
 ## License
+
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

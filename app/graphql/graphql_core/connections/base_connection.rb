@@ -18,6 +18,10 @@ module GraphqlCore
       def total
         object.items.size
       end
+
+      # def cursor
+      #   object.gid
+      # end
     end
   end
 end

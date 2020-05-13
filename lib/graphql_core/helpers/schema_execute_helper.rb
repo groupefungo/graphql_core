@@ -20,8 +20,7 @@ module GraphqlCore
         print_errors("Please set 'mutation' options key to true if you are using key2 option")
       end
 
-      # response = GraphqlCore.configuration.schema_execute.call(query, variables, context)
-      response = Schema.execute(query, {variables: variables, context: context})
+      response = GraphqlCore.configuration.schema_execute.call(query, variables, context)
       hash     = response.to_h
 
       if hash['errors']

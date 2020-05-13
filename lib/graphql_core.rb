@@ -22,6 +22,5 @@ module GraphqlCore
   end
 end
 
-# require 'graphql_core/schema'
-# require 'app/graphql/graphql_core/connections/base_connection'
-# require 'app/graphql/graphql_core/interfaces/base_interface'
+require 'graphql_core/helpers/expect_hash_to_eq_helper'
+require 'graphql_core/helpers/schema_execute_helper'

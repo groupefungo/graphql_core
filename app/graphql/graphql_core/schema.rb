@@ -1,7 +1,7 @@
 module GraphqlCore
   class Schema < GraphQL::Schema
-    mutation(GraphqlCore::Types::MutationType)
-    query(GraphqlCore::Types::QueryType)
+    # mutation(GraphqlCore::Types::MutationType)
+    # query(GraphqlCore::Types::CoreQueryType)
 
     # Add built-in connections for pagination
     use GraphQL::Pagination::Connections

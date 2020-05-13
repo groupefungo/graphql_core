@@ -10,7 +10,7 @@ module GraphqlCore
       end
 
       # def add_global_id_node_query_to_query_type
-      #   query_type_file   = 'app/graphql/types/query_type.rb'
+      #   query_type_file   = 'app/graphql/types/core_query_type.rb'
       #   query_types_path  = File.join(destination_root, query_type_file)
       #   field_row_comment = '  ## GRAPHQL CORE QUERIES'
       #   field_row         = '  field :node, resolver: GraphqlCore::Queries::GlobalIdNodeQuery, null: false'
