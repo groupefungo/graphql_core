@@ -15,7 +15,6 @@ module GraphqlCore
     def schema_execute(query, variables, context, **options)
       ensure_options(options)
       @response = GraphqlCore.configuration.schema_execute.call(query, variables, context)
-      # @response = GraphqlCore.configuration.schema.execute(query, {variables: variables, context: context})
       read_response
     end
 
@@ -27,35 +26,29 @@ module GraphqlCore
       end
 
       if options[:key].nil?
-        print_errors("Please provide a key in options parameters for schema_execute method")
+        raise("Please provide a key in options parameters for schema_execute method")
       end
 
       if !options[:key2].blank? and (options[:mutation].nil? or !options[:mutation])
-        print_errors("Please set 'mutation' options key to true if you are using key2 option")
+        raise("Please set 'mutation' options key to true if you are using key2 option")
       end
       @options = options
     end
 
-    def print_errors(message)
-      pp "*****************************   schema_execute method errors   **********************************"
-      puts message
-      pp "*************************************************************************************************"
-      message
-    end
-
     def read_response
       if response_hash['errors']
-        print_errors(response_hash['errors'][0]['message'])
+        raise(response_hash['errors'][0]['message'])
       else
         if @options[:edge_type]
           return data[@options[:key]]['edges']
         else
-          return @options[:mutation] ? data[@options[:key]][@options[:key2]] : data[@options[:key]]
+          return @options[:mutation] && @options[:key2] ? data[@options[:key]][@options[:key2]] : data[@options[:key]]
         end
       end
     end
 
     def data
+      pp response_hash
       @response_data ||= response_hash['data']
     end
 
