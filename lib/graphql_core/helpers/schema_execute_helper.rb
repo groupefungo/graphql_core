@@ -6,40 +6,54 @@ module GraphqlCore
     #
     # ACCEPTED OPTIONS
     # :key => Symbol, Required, get data by key in response hash
-    # :key2 => Symbol, Required for Mutation responses, in relation with :mutation Boolean
+    # :key2 => Symbol, Required for Mutation responses, in relation with :mutation
     # :edge_type => Boolean, Optional, gets nested key in hash for GraphQL Edges Types
     # :mutation => Boolean, Optional, gets nested :key2 in hash for GraphQL Mutation Types
+    # :multiple => Boolean, Optional, in relation with :mutation, will only return :key
     # @author DAVID LAROCHELLE
 
     def schema_execute(query, variables, context, **options)
+      ensure_options(options)
+      @response = GraphqlCore.configuration.schema_execute.call(query, variables, context)
+      read_response
+    end
+
+    protected
+
+    def ensure_options(options)
+      if options[:multiple].nil?
+        options[:multiple] = false
+      end
+
       if options[:key].nil?
-        print_errors("Please provide a key in options parameters for schema_execute method")
+        raise("Please provide a key in options parameters for schema_execute method")
       end
 
       if !options[:key2].blank? and (options[:mutation].nil? or !options[:mutation])
-        print_errors("Please set 'mutation' options key to true if you are using key2 option")
+        raise("Please set 'mutation' options key to true if you are using key2 option")
       end
+      @options = options
+    end
 
-      response = GraphqlCore.configuration.schema_execute.call(query, variables, context)
-      hash     = response.to_h
-
-      if hash['errors']
-        print_errors(hash['errors'][0]['message'])
+    def read_response
+      if response_hash['errors']
+        raise(response_hash['errors'][0]['message'])
       else
-        data = response['data']
-        if options[:edge_type]
-          return data[options[:key]]['edges']
+        if @options[:edge_type]
+          return data[@options[:key]]['edges']
         else
-          return options[:mutation] ? response['data'][options[:key]][options[:key2]] : response['data'][options[:key]]
+          return @options[:mutation] && @options[:key2] ? data[@options[:key]][@options[:key2]] : data[@options[:key]]
         end
       end
     end
 
-    def print_errors(message)
-      pp "*****************************   schema_execute method errors   **********************************"
-      puts message
-      pp "*************************************************************************************************"
-      message
+    def data
+      pp response_hash
+      @response_data ||= response_hash['data']
+    end
+
+    def response_hash
+      @response_hash ||= @response.to_h
     end
   end
 end

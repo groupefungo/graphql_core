@@ -1,1 +1,0 @@
-field :node, resolver: GraphqlCore::Queries::GlobalIdNodeQuery, null: false

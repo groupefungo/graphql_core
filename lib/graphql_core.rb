@@ -24,3 +24,4 @@ end
 
 require 'graphql_core/helpers/expect_hash_to_eq_helper'
 require 'graphql_core/helpers/schema_execute_helper'
+require 'graphql_core/helpers/pagination_info_gql_helpers'
