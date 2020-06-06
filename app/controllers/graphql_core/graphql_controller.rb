@@ -7,6 +7,7 @@ module GraphqlCore
       context        = {
           # current_user: current_user,
       }
+      context[:current_user] = current_user if GraphqlCore.configuration.use_current_user_context
       result         = GraphqlCore.configuration.schema_execute.call(query, variables, context)
       render json: result
     rescue => e

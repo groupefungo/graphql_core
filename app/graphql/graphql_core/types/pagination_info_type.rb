@@ -1,9 +1,14 @@
 module GraphqlCore
   module Types
     class PaginationInfoType < GraphQL::Types::Relay::PageInfo
-      field :pages_count, Int, description: 'Total of pages', null: false
-      field :remaining, Int, description: 'Remaining nodes to fetch', null: false
-      field :total, Int, description: 'Total of all nodes', null: false
+      field :pages_count, Int, null: false,
+          description: 'The total of pages'
+
+      field :remaining, Int, null: false,
+          description: 'Remaining nodes to fetch'
+
+      field :total, Int, null: false,
+          description: 'Total of all nodes'
 
       def pages_count
         if per_page
