@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 6.0.3"
   spec.add_dependency 'graphql', "~> 1.10.10"
+  spec.add_dependency 'apollo_upload_server', '2.0.1'
 
   spec.add_development_dependency 'factory_bot', '~> 5.2'
   spec.add_development_dependency 'faker', '~> 2.12'
