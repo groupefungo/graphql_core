@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe GraphqlCore::Queries::MeQuery do
+RSpec.describe 'GraphqlCore::Queries::MeQuery' do
   subject {described_class}
   context 'given an authenticated user' do
     let!(:user) {create(:user)}
