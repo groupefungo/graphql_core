@@ -33,7 +33,15 @@ module GraphqlCore
       protected
 
       def per_page
-        object.first || object.last
+        first || last
+      end
+
+      def first
+        object.respond_to?(:first) ? object.first : object.arguments[:first]
+      end
+
+      def last
+        object.respond_to?(:last) ? object.last : object.arguments[:last]
       end
     end
   end
