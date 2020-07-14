@@ -48,7 +48,6 @@ module GraphqlCore
     end
 
     def data
-      pp response_hash
       @response_data ||= response_hash['data']
     end
 
