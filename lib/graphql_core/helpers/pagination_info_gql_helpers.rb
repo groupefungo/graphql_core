@@ -13,8 +13,8 @@ fragment PageInfoFragment on PaginationInfo {
     end
 
     def page_info_fragment_response(objects, **connection_input)
+      total_count = objects.count
       unless connection_input.blank?
-        total_count   = objects.first.class.name.constantize.count
         has_next_page = total_count - connection_input[:first] > 0
         return {
             'hasNextPage'     => has_next_page,
@@ -29,7 +29,7 @@ fragment PageInfoFragment on PaginationInfo {
           'hasPreviousPage' => false,
           'pagesCount'      => 1,
           'remaining'       => 0,
-          'total'           => objects.size
+          'total'           => total_count
       }
     end
   end
