@@ -5,6 +5,7 @@ module GraphqlCore
         field :date, GraphQL::Types::ISO8601Date, null: false
         field :date_string, String, null: false
         field :day_of_week, Int, null: false
+        field :is_weekend, Boolean, null: false
         field :week_day, String, null: false
 
         def date
@@ -17,6 +18,10 @@ module GraphqlCore
 
         def day_of_week
           object.day
+        end
+
+        def is_weekend
+          object.saturday? || object.sunday?
         end
 
         def week_day
