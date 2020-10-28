@@ -6,6 +6,8 @@ module GraphqlCore
         field :days_of_week, [Types::Calendar::DayType], null: false
         field :month, Int, null: false
         field :month_name, String, null: false
+        field :offset, Int, null: false
+        field :week_day, Int, null: false
         field :week_day_names, [String], null: false
         field :year, Int, null: false
 
@@ -29,7 +31,6 @@ module GraphqlCore
           # I18n.t(Date::MONTHNAMES[month])
           object.strftime('%B')
         end
-
 
         def week_day_names
           Date::DAYNAMES.map { |day_name| I18n.t(day_name) }

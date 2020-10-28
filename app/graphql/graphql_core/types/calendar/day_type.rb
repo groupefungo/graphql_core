@@ -6,7 +6,8 @@ module GraphqlCore
         field :date_string, String, null: false
         field :day_of_week, Int, null: false
         field :is_weekend, Boolean, null: false
-        field :week_day, String, null: false
+        field :week_day, Int, null: false
+        field :week_day_name, String, null: false
 
         def date
           object
@@ -25,6 +26,10 @@ module GraphqlCore
         end
 
         def week_day
+          object.wday
+        end
+
+        def week_day_name
           # I18n.t(Date::DAYNAMES[object.wday])
           object.strftime("%A")
         end
