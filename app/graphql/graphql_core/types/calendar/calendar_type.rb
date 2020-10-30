@@ -7,7 +7,6 @@ module GraphqlCore
         field :days_of_week, [Types::Calendar::DayType], null: false
         field :month, Int, null: false
         field :month_name, String, null: false
-        field :offset, Int, null: false
         field :week_day, Int, null: false
         field :week_day_names, [String], null: false
         field :year, Int, null: false
