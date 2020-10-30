@@ -2,6 +2,7 @@ module GraphqlCore
   module Types
     module Calendar
       class CalendarType < BaseObject
+        field :day, Types::Calendar::DayType, null: false
         field :days_of_month, [Types::Calendar::DayType], null: false
         field :days_of_week, [Types::Calendar::DayType], null: false
         field :month, Int, null: false
@@ -12,7 +13,7 @@ module GraphqlCore
         field :year, Int, null: false
 
         def day
-          object.day
+          object
         end
 
         def days_of_month
@@ -28,7 +29,6 @@ module GraphqlCore
         end
 
         def month_name
-          # I18n.t(Date::MONTHNAMES[month])
           object.strftime('%B')
         end
 
