@@ -67,7 +67,7 @@ RSpec.configure do |config|
   FactoryBot.find_definitions
   config.include FactoryBot::Syntax::Methods
 
-  [ExpectHashToEqHelper, SchemaExecuteHelper].each do |helper|
+  [GraphqlCore::ExpectHashToEqHelper, GraphqlCore::SchemaExecuteHelper].each do |helper|
     config.include(helper)
   end
 end
