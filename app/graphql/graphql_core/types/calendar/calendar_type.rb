@@ -12,7 +12,7 @@ module GraphqlCore
         field :year, Int, null: false
 
         def day
-          object
+          date
         end
 
         def days_of_month
@@ -24,11 +24,11 @@ module GraphqlCore
         end
 
         def month
-          object.month
+          date.month
         end
 
         def month_name
-          object.strftime('%B')
+          date.strftime('%B')
         end
 
         def week_day_names
@@ -36,17 +36,21 @@ module GraphqlCore
         end
 
         def year
-          object.year
+          date.year
         end
 
         protected
 
         def month_range
-          @month_range ||= (object.beginning_of_month.beginning_of_week(:sunday)..object.end_of_month.end_of_week(:sunday)).to_a
+          @month_range ||= (date.beginning_of_month.beginning_of_week(:sunday)..date.end_of_month.end_of_week(:sunday)).to_a
         end
 
         def week_range
-          @week_range ||= (object.beginning_of_week(:sunday)..object.end_of_week(:sunday)).to_a
+          @week_range ||= (date.beginning_of_week(:sunday)..date.end_of_week(:sunday)).to_a
+        end
+
+        def date
+          object[:date]
         end
       end
     end
