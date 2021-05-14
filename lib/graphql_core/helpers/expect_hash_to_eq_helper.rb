@@ -10,7 +10,6 @@ module GraphqlCore
           elsif value.is_a?(Array)
             expect_array_to_eq(value, result[key])
           else
-            pp key
             expect(result[key]).to eq(value)
           end
         end
@@ -24,7 +23,6 @@ module GraphqlCore
             if value.is_a?(Hash)
               expect_hashes_to_eq(value, result[index][key])
             else
-              pp key
               expect(result[index][key]).to eq(value)
             end
           end

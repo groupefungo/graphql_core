@@ -26,7 +26,6 @@ module GraphqlCore
 
         def hours
           hours_full_range.step(1.hour).map do |date|
-            pp date
             Time.at(date)
           end
         end
